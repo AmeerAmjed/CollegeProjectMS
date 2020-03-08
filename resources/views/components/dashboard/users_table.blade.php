@@ -11,11 +11,11 @@
     <tbody>
         @foreach ($items as $item)
             <tr>
-                <th> {{ $item->id }} </th>  
-                <th> {{ $item->fullname }} </th>   
-                <th> {{ $item->college->name }} </th>   
-                <th> {{ $item->stage->stage }} </th>
-                <th> {{ boolval($item->active) ? 'True' : 'False' }} </th>   
+                <th> {{ $item->id }} </th>
+                <th> {{ $item->fullname }} </th>
+                <th> {{ $user->college ? $item->college->name : 'None' }} </th>
+                <th> {{ $user->stage ? $item->stage->stage : 'None' }} </th>
+                <th> {{ boolval($item->active) ? 'True' : 'False' }} </th>
             </tr>
         @endforeach
     </tbody>

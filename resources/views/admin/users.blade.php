@@ -3,18 +3,18 @@
 @section('title', 'Admin- Users')
 @section('Jtitle', 'User')
 
-@section('content') 
+@section('content')
     <div class="container" style="margin-bottom: 10%">
         <div id='dashboard' class="card" >
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-12">
-                        @component('components.search')   
+                        @component('components.search')
                         @endcomponent
                     </div>
                 </div>
                 <div class="row">
-                    @foreach ($users as $user)  
+                    @foreach ($users as $user)
                         <div class="col-4">
                             <div class="d-flex flex-row border rounded">
                                     <div class="p-0 " style="width: 40%;">
@@ -22,11 +22,15 @@
                                     </div>
                                     <div class="pl-3 pt-2 pr-2 pb-2 w-75 border-left">
                                         <h4 class="text-dark"> <a href="/profile/{{$user->id}}"></a> {{ $user->fullname }}</h4>
-                                        <h5 class="text-dark" style="text-transform: capitalize">{{ $user->college->name }} | {{ $user->stage->stage }}</h5>
+                                        <h5 class="text-dark" style="text-transform: capitalize">
+                                            {{ $user->college ? $user->college->name  : 'None' }}
+                                            |
+                                            {{ $user->stage ? $user->stage->stage : 'None' }}
+                                        </h5>
                                         <ul class="m-0 float-left" style="list-style: none; margin:0; padding: 0">
-                                            <li> 
+                                            <li>
                                                 <a target="_blank" href="https://github.com/{{ $user->github }}" class="text-dark">
-                                                    <i class="fa fa-github fa-2x"></i> 
+                                                    <i class="fa fa-github fa-2x"></i>
                                                     {{-- Github --}}
                                                 </a>
                                                 {{-- <a href="#!">
@@ -39,16 +43,16 @@
                                                 <i class="fa fa-cog "></i>
                                             </a>
                                             {{-- <a href="#!"  class="btn-active btn @if($user->active) btn-success @else btn-danger @endif ">
-                                                @if($user->active) 
+                                                @if($user->active)
                                                     <i class="fa fa-toggle-on"></i>
-                                                @else 
+                                                @else
                                                     <i class="fa fa-toggle-off"></i>
                                                 @endif
                                             </a> --}}
                                         </p>
                                 </div>
                             </div>
-                        </div>                
+                        </div>
                     @endforeach
                 </div>
                 <div class="row">
@@ -73,7 +77,7 @@
                     <div class="p-0 m-auto" style="width: 30%;">
                         <img  id='0-avatar' src="/storage/images/users/471a1ad342659289433e05a611d206f8.png" class="img-thumbnail border-0 " />
                         <h4 id='userName' class="text-center mt-2"> User Name </h4>
-                        <hr> 
+                        <hr>
                     </div>
                     <div>
                         <div class="form-group text-center">
