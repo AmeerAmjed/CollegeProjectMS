@@ -16,8 +16,8 @@ Auth::routes(['verify' => true]);
 
 
 Route::get('/', function () {
-    if (auth()->user()){ 
-        return view('home'); 
+    if (auth()->user()){
+        return view('home');
     }
     return view('index');
 });
@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('/profile', 'ProfileController@index')->middleware('verified');
-    Route::resource("/project", 'ProjectController')->middleware('verified');
+    Route::resource("/project", 'ProjectController')->middleware('user.active')->middleware('verified');
 });
 
 Route::middleware(['admin:web', 'auth'])->prefix('admin')->group(function () {

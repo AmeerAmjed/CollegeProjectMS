@@ -15,10 +15,10 @@ class UsersController extends Controller
 
         return response()->json(['users' => User::select('id', 'fullname')->all()]);
     }
-    
+
     public function update(Request $request, $id)
-    {      
-        $user = User::find($id);  
+    {
+        $user = User::find($id);
 
         if(!$user){
             return response()->json(['msg' => 'Not found user'], 404);
@@ -32,38 +32,39 @@ class UsersController extends Controller
         }
 
         if ($request->role != $user->role->id){
-            if ( Role::find($request->role) ){    
-                $user->role_id = $request->role;
+            if ($role = Role::find($request->role) ){
+                // $user->role_id = $request->role;
+                $user->role()->associate($role);
                 $user->save();
             }
         }
 
         return response()->json([
-            'msg' => 'Successfuly update', 
+            'msg' => 'Successfuly update',
             'user' => [
                 'id' => $user->id
-            ] 
+            ]
         ]);
     }
 
     public function show(Request $request, $id){
-        $user = User::find($id);     
+        $user = User::find($id);
         if(!$user){
             return response()->json(['msg' => 'Not found user'], 404);
         }
 
-        return response()->json([ 
+        return response()->json([
             'user' => [
                 'id' => $user->id,
                 'fullname' => $user->fullname,
                 'active'   => $user->active,
                 'role'     => $user->role_id,
-            ] 
+            ]
         ]);
     }
 
     // public function destroy(Request $request, $id)
-    // {   
+    // {
     //     $user = User::find($id);
 
     //     if(!$user){

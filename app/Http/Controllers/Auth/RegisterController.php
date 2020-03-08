@@ -36,7 +36,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm(College $college, Stage $stage)
     {
-        
+
 
         return view('auth.register', [
             'stages'   => $stage->all()
@@ -62,7 +62,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-           
+
             'fullname' => ['required', 'string', 'max:255'],
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -81,17 +81,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = Role::where('name', 'student')->first();
-        
-        return User::create([
+        $user = User::create([
             'fullname' => $data['fullname'],
             'gender'   => $data['gender'],
             'avatar'   => 'avater.png',
             'email'    => $data['email'],
-            'role_id'  => $role->id,
-            'stage_id' => $data['stage'],
-            'college_id' => $data['college'],
+            // 'role_id'  => $role->id,
+            // 'stage_id' => $data['stage'],
+            // 'college_id' => $data['college'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $role = Role::where('name', 'student')->first();
+        $college =  College::find($data['college']);
+        $stage  =  Stage::find($data['college']);
+
+        $user->role()->associate($role);
+        $user->college()->associate($college);
+        $user->stage()->associate($stage);
+        $user->save();
+
+        return $user;
     }
 }

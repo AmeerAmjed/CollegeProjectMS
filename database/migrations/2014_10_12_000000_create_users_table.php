@@ -12,16 +12,15 @@ class CreateUsersTable extends Migration
      * @return void
      */
     public function up()
-    {   
-        Schema::dropIfExists('users');
-        
+    {
+        // Schema::dropIfExists('users');
+
+
         Schema::create('users', function (Blueprint $table) {
             // $table->engine = 'InnoDB';
 
             $table->bigIncrements('id');
-            $table->BigInteger('role_id')->unsigned();
-            $table->BigInteger('college_id')->unsigned();
-            $table->BigInteger('stage_id')->unsigned();
+
 
             $table->string('fullname');
             $table->string('email')->unique();
@@ -31,12 +30,12 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('work')->nullable();
             $table->string('github')->nullable();
-            
-            // 
+
+            //
             $table->tinyInteger('active')->default(0);
 
             $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();            
+            $table->rememberToken();
             $table->timestamps();
         });
 

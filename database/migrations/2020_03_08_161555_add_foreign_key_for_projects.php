@@ -15,8 +15,15 @@ class AddForeignKeyForProjects extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
 
-            $table->foreign('stage_id')->references('id')->on('stages')->onDelete('cascade');
-            $table->foreign('college_id')->references('id')->on('colleges')->onDelete('cascade');
+            $table->unsignedBigInteger('stage_id')->nullable();
+            $table->foreign('stage_id')->references('id')->on('stages')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->unsignedBigInteger('college_id')->nullable();
+            $table->foreign('college_id')->references('id')->on('colleges')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
         });
     }
 
@@ -27,6 +34,11 @@ class AddForeignKeyForProjects extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('projects', function (Blueprint $table) {
+            $table->dropForeign('projects_college_id_foreign');
+            $table->dropForeign('projects_stage_id_foreign');
+
+        });
     }
+
 }

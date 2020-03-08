@@ -15,7 +15,7 @@ class CreateCollegesTable extends Migration
     {
         Schema::create('colleges', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('img')->default('colleges-default.png');
             $table->timestamps();
         });
