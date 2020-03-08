@@ -15,7 +15,7 @@ class CreateProjectViewsTable extends Migration
     {
         Schema::create('project_views', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('project_id')->unsigned();
+            $table->bigInteger('project_id');
             $table->string('ip_address');
             $table->string('session_id');
             $table->string('user_agent');

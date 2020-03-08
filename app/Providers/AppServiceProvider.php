@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         try {
             View::share('colleges', College::all());
         } catch (\Throwable $th) {
-            //throw $th;
+            View::share('colleges', []);
         }
         
     }
