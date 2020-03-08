@@ -15,7 +15,7 @@ Auth::routes(['verify' => true]);
 
 
 
-Route::get('/', function () {
+Route::get('/', function(){
     if (auth()->user()){
         return view('home');
     }
