@@ -15,9 +15,9 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('stage_id');
-            $table->bigInteger('college_id');
-            
+            $table->BigInteger('stage_id')->unsigned();
+            $table->BigInteger('college_id')->unsigned();
+
             $table->string('name');
             $table->text('description');
             $table->string('link')->nullable();
@@ -26,8 +26,6 @@ class CreateProjectsTable extends Migration
             $table->tinyInteger('active')->default(0);
             $table->timestamps();
 
-            $table->foreign('stage_id')->references('id')->on('stages')->onDelete('cascade');
-            $table->foreign('college_id')->references('id')->on('colleges')->onDelete('cascade');
         });
     }
 

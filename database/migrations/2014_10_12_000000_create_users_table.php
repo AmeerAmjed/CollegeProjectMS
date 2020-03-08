@@ -12,12 +12,16 @@ class CreateUsersTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   
+        Schema::dropIfExists('users');
+        
         Schema::create('users', function (Blueprint $table) {
+            // $table->engine = 'InnoDB';
+
             $table->bigIncrements('id');
-            $table->BigInteger('role_id');
-            $table->BigInteger('college_id');
-            $table->BigInteger('stage_id');
+            $table->BigInteger('role_id')->unsigned();
+            $table->BigInteger('college_id')->unsigned();
+            $table->BigInteger('stage_id')->unsigned();
 
             $table->string('fullname');
             $table->string('email')->unique();
@@ -34,11 +38,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();            
             $table->timestamps();
-
-            $table->foreign('users.college_id')->references('colleges.id')->on('colleges')->onDelete('cascade');
-            $table->foreign('users.role_id')->references('roles.id')->on('roles')->onDelete('cascade');
-            $table->foreign('users.stage_id')->references('stages.id')->on('stages')->onDelete('cascade');
         });
+
+
     }
 
     /**
