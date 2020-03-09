@@ -67,7 +67,7 @@
   } */
   
   .upper-bar .info p {
-    font-family: "OpenSans-SemiBold";
+/*     font-family: "OpenSans-SemiBold"; */
     text-transform: uppercase;
     color: #22588f;
     font-weight: bold;
@@ -169,7 +169,7 @@
   }
   
   .navbar-light ul li a {
-    font-family: "OpenSans-SemiBold";
+/*     font-family: "OpenSans-SemiBold"; */
     color: #fff;
     font-size: 17px !important;
   }
@@ -210,7 +210,7 @@
     font-size: 20px;
     font-weight: bold;
     text-shadow: 0px 1px 4px #22588f85;
-    font-family: "OpenSans-SemiBold";
+/*     font-family: "OpenSans-SemiBold"; */
   }
   
   .overviwe_card_info .btn-primary {
@@ -1111,14 +1111,14 @@
     margin-top: 10px;
   }
   
-  .info ul li a {
+/*   .info ul li a {
     font-family: "OpenSans-Regular";
-  }
+  } */
   
   .info ul li a:hover {
     text-decoration: none;
     font-weight: bolder;
-    font-family: "OpenSans-SemiBold";
+/*     font-family: "OpenSans-SemiBold"; */
   }
   
   /*======================================================================================================*/
